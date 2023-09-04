@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+class Solution {
+public:
+    int evalRPN(vector<string>& tokens) {
+        stack<int>st;
+        for(auto x:tokens){
+            if(x != "+" && x != "*" && x != "/" && x != "-"){
+                int p = stoi(x);
+                st.push(p);
+            }else{
+                int op1 = st.top();
+                st.pop();
+                int op2 = st.top();
+                st.pop();
+
+                if(x=="+") st.push(op2+op1);
+                if(x=="-") st.push(op2-op1);
+                if(x=="*") st.push(op2*op1);
+                if(x=="/") st.push(op2/op1);
+
+            }
+        }
+        return st.top();
+    }
+};
